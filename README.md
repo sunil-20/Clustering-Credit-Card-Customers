@@ -1,34 +1,132 @@
-As we are slowly reviving from the tough economic conditions from COVID-19, there has been mild increment in credit utilization comparing to 2020. The credit usage has dropped to 25%(compared to 29% in 2019). As pandemic has forced to rethink the financial portfolio of each and every Americans, financial institutions are also finding a better approach to target services to different customer clusters. Understanding the challenge of credit market, once reticent financial institution are launching new marketing campaign and promotions in the face of recession.
+# Clustering Credit Card Customers (Unsupervised Machine Learning)
 
-On this background, the goal of this project is to identifying and evaluation of the credit card holder's clusters which assists business by providing better understanding of cluster characteristics and finding better and more personalise approach to target services to them.
+Customer segmentation project using **K-Means**, **DBSCAN**, and **Gaussian Mixture Models** to identify credit card customer clusters based on spending behavior, credit utilization, repayment patterns, and transaction characteristics.
 
-The sample Data summarizes the usage behavior of 8950 credit card holders. Data consists of 18 features accomodating six months of credit card usage. Data Source https://www.kaggle.com/arjunbhasin2013/ccdata 
+---
 
+## 1. Project Overview
 
-**Following is the Data Dictionary for Credit Card dataset :-**
+As the U.S. economy recovers from the financial impacts of COVID-19, credit usage behaviors have shifted significantly. Financial institutions now face increased pressure to understand post‑pandemic consumer behavior and redesign personalized financial products.
 
-<strong>CUSTID</strong> : Identification of Credit Card holder (Categorical)<br>
-<strong>BALANCE</strong> : Balance amount left in their account to make purchases<br>
-<strong>BALANCEFREQUENCY</strong> : How frequently the Balance is updated, score between 0 and 1 (1 = frequently updated, 0 = not frequently updated)<br>
-<strong>PURCHASES</strong> : Amount of purchases made from account<br>
-<strong>ONEOFFPURCHASES</strong> : Maximum purchase amount done in one-go<br>
-<strong>INSTALLMENTSPURCHASES</strong> : Amount of purchase done in installment<br>
-<strong>CASHADVANCE</strong> : Cash in advance given by the user<br>
-<strong>PURCHASESFREQUENCY</strong> : How frequently the Purchases are being made, score between 0 and 1 (1 = frequently purchased, 0 = not frequently purchased)<br>
-<strong>ONEOFFPURCHASESFREQUENCY</strong> : How frequently Purchases are happening in one-go (1 = frequently purchased, 0 = not frequently purchased)<br>
-<strong>PURCHASESINSTALLMENTSFREQUENCY</strong> : How frequently purchases in installments are being done (1 = frequently done, 0 = not frequently done)<br>
-<strong>CASHADVANCEFREQUENCY</strong> : How frequently the cash in advance being paid<br>
-<strong>CASHADVANCETRX</strong> : Number of Transactions made with "Cash in Advanced"<br>
-<strong>PURCHASESTRX</strong> : Numbe of purchase transactions made<br>
-<strong>CREDITLIMIT</strong> : Limit of Credit Card for user<br>
-<strong>PAYMENTS</strong> : Amount of Payment done by user<br>
-<strong>MINIMUM_PAYMENTS</strong> : Minimum amount of payments made by user<br>
-<strong>PRCFULLPAYMENT</strong> : Percent of full payment paid by user<br>
-<strong>TENURE</strong> : Tenure of credit card service for user<br>
+This project applies **unsupervised machine learning** to segment **8,950 credit card customers** into meaningful groups to support:
 
-<strong> Clustering algorithms used:</strong>
- <ol type = "1">
-         <li>K-Means clustering</li>
-         <li>DBSCAN clustering</li>
-         <li>Gaussian mixture clustering</li>
-              </ol>
+- personalized marketing  
+- risk assessment  
+- credit limit optimization  
+- customer retention strategies  
+- targeted financial products  
+
+Using real-world credit behavior data, the project identifies interpretable and business‑relevant clusters that a financial institution can use to improve decision-making.
+
+---
+
+## 2. Dataset
+
+- **Observations:** 8,950 customers  
+- **Features:** 18 behavioral and transactional variables  
+- **Time span:** 6 months of credit card activity  
+- **Source:** Kaggle Credit Card Dataset  
+  https://www.kaggle.com/arjunbhasin2013/ccdata
+
+### Data Dictionary (Summary)
+
+- **BALANCE:** Remaining balance  
+- **PURCHASES:** Total purchases  
+- **ONEOFFPURCHASES:** Largest single purchase  
+- **INSTALLMENTSPURCHASES:** Installment-based spending  
+- **CASHADVANCE:** Cash withdrawn on credit  
+- **PURCHASESFREQUENCY:** Purchase frequency score (0–1)  
+- **CASHADVANCEFREQUENCY:** Cash advance frequency score  
+- **PAYMENTS / MINIMUM_PAYMENTS:** Payment behavior  
+- **CREDITLIMIT:** Individual credit limit  
+- **PRCFULLPAYMENT:** Percent of full payments  
+- **TENURE:** Customer tenure  
+
+The dataset captures multiple dimensions of consumer spending, repayment habits, and credit utilization—ideal for clustering analysis.
+
+---
+
+## 3. Workflow Summary
+
+### 3.1 Data Cleaning & Preprocessing
+- Removed missing or inconsistent entries  
+- Standardized numerical features using **StandardScaler**  
+- Treated skewness and outliers (log transformation where appropriate)  
+- Normalized high‑variance features  
+- Removed non-informative columns (e.g., CUSTID)
+
+### 3.2 Exploratory Data Analysis
+- Distribution analysis of spending and repayment  
+- Correlation heatmaps  
+- Credit usage and payment‑behavior relationships  
+- Identification of high‑variance features  
+- Visualization of behavioral patterns across customers
+
+### 3.3 Clustering Approach
+Three clustering methods were used:
+
+#### **K-Means**
+- Baseline clustering method  
+- Easy to interpret using cluster centroids  
+- Number of clusters determined using:
+  - Elbow Method  
+  - Silhouette Score
+
+#### **DBSCAN**
+- Density-based clustering  
+- Captures irregular patterns  
+- Identifies noise/anomalies (e.g., extreme spenders)
+
+#### **Gaussian Mixture Models (GMM)**
+- Soft clustering (probabilistic)  
+- Allows overlapping clusters  
+- Often more realistic for financial behavior modeling
+
+---
+
+## 4. Results Summary (Cluster Profiles)
+
+### Final Segments Identified
+
+| Cluster | Customer Profile | Key Traits |
+|--------|------------------|------------|
+| **Cluster 1** | High‑value transactors | High purchasing activity, strong repayment behavior, high credit limits |
+| **Cluster 2** | Revolvers | High balances, low full-payment rates, moderate purchases |
+| **Cluster 3** | Low‑usage customers | Minimal spending, low frequency of purchases, low transaction volume |
+| **Cluster 4** | Cash‑advance dominant users | High cash‑advance transactions, elevated financial risk, low full payments |
+
+### Key Observations
+
+- **High-value customers** have strong financial discipline and represent the best target for premium upgrades.  
+- **Revolvers** carry balances monthly, posing potential credit risk but high interest revenue.  
+- **Low-usage customers** may benefit from engagement incentives.  
+- **Cash-advance users** show elevated financial stress and may need credit-limit adjustments or intervention.
+
+---
+
+## 5. Business Insights
+
+The clustering results yield actionable insights:
+
+- Premium rewards and installment plans can be targeted toward **high-value customers**.  
+- **Revolver clusters** should be monitored with customized financial planning support.  
+- Engagement campaigns can activate **low-usage** customer groups.  
+- **Cash-advance heavy users** require monitoring and targeted risk mitigation strategies.
+
+---
+
+## 6. Future Work
+
+- Use PCA for dimensionality reduction  
+- Explore hierarchical clustering  
+- Build a dashboard in Tableau or Power BI  
+- Develop cluster‑specific marketing simulations  
+- Integrate demographic variables for richer segmentation  
+
+---
+
+## 7. Citation
+
+Dataset: https://www.kaggle.com/arjunbhasin2013/ccdata
+
+---
