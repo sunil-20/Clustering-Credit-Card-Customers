@@ -25,8 +25,8 @@ Using real-world credit behavior data, the project identifies interpretable and 
 - **Observations:** 8,950 customers  
 - **Features:** 18 behavioral and transactional variables  
 - **Time span:** 6 months of credit card activity  
-- **Source:** Kaggle Credit Card Dataset  
-  https://www.kaggle.com/arjunbhasin2013/ccdata
+- **Source:** Kaggle Credit Card Dataset(link at the end)  
+ 
 
 ### Data Dictionary (Summary)
 
